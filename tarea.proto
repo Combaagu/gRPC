@@ -1,0 +1,25 @@
+// tarea.proto
+syntax = "proto3";
+
+package tareas;
+
+service ServicioTareas {
+  rpc CrearTarea (NuevaTarea) returns (RespuestaTarea);
+  rpc ObtenerEstadisticas (SolicitudEstadisticas) returns (RespuestaEstadisticas);
+}
+
+message NuevaTarea {
+  string titulo = 1;
+  string descripcion = 2;
+}
+
+message RespuestaTarea {
+  string mensaje = 1;
+  bool exito = 2;
+}
+
+message SolicitudEstadisticas {}
+
+message RespuestaEstadisticas {
+  int32 totalTareas = 1;
+}
