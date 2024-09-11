@@ -1,9 +1,9 @@
-// server.js
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
 const conectarDB = require('./db');
 const mongoose = require('mongoose');
 require('dotenv').config();
+
 
 const packageDefinition = protoLoader.loadSync('tarea.proto', {
   keepCase: true,
@@ -13,27 +13,29 @@ const packageDefinition = protoLoader.loadSync('tarea.proto', {
   oneofs: true,
 });
 
+
 const tareasProto = grpc.loadPackageDefinition(packageDefinition).tareas;
 
-// Definición del modelo de Tarea en MongoDB
+// genera el modelo de la tarea en mongo
 const Tarea = mongoose.model('Tarea', new mongoose.Schema({
   titulo: String,
   descripcion: String,
   created_at: { type: Date, default: Date.now },
 }));
 
-// Implementación de los servicios gRPC
+// los servicios gRPC
 const server = new grpc.Server();
 
+//add services
 server.addService(tareasProto.ServicioTareas.service, {
   CrearTarea: async (call, callback) => {
     const { titulo, descripcion } = call.request;
     try {
       const nuevaTarea = new Tarea({ titulo, descripcion });
       await nuevaTarea.save();
-      callback(null, { mensaje: 'Tarea creada con éxito', exito: true });
+      callback(null, { mensaje: 'Tarea creada con éxito'});
     } catch (error) {
-      callback({ mensaje: 'Error al crear la tarea', exito: false });
+      callback({ mensaje: 'Error al crear la tarea'});
     }
   },
   ObtenerEstadisticas: async (_, callback) => {
