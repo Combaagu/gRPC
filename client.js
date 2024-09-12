@@ -25,3 +25,4 @@ cliente.ObtenerEstadisticas({}, (error, response) => {
   if (error) console.error(error);
   else console.log('Estadísticas:', response);
 });
+

@@ -1,4 +1,3 @@
-// tarea.proto
 syntax = "proto3";
 
 package tareas;
@@ -6,11 +5,17 @@ package tareas;
 service ServicioTareas {
   rpc CrearTarea (NuevaTarea) returns (RespuestaTarea);
   rpc ObtenerEstadisticas (SolicitudEstadisticas) returns (RespuestaEstadisticas);
+  rpc DarDeBajaTarea (SolicitudDarDeBaja) returns (RespuestaTarea);
+  rpc ObtenerTareas (SolicitudTareas) returns (RespuestaTareasList);
 }
 
 message NuevaTarea {
   string titulo = 1;
   string descripcion = 2;
+}
+
+message SolicitudDarDeBaja {
+  string id = 1;
 }
 
 message RespuestaTarea {
@@ -22,4 +27,19 @@ message SolicitudEstadisticas {}
 
 message RespuestaEstadisticas {
   int32 totalTareas = 1;
+  int32 tareasActivas = 2;
+  int32 tareasInactivas = 3;
+}
+
+message SolicitudTareas {}
+
+message TareaItem {
+  string id = 1;
+  string titulo = 2;
+  string descripcion = 3;
+  string created_at = 4;
+}
+
+message RespuestaTareasList {
+  repeated TareaItem tareas = 1;
 }
