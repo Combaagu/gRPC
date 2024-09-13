@@ -1,19 +1,27 @@
--- gRPC
+"gRPC & API-REST"
 
+-- clonamos el repositorio de github
+git clone https://github.com/Combaagu/gRPC.git
+
+-- instalamos las dependencias
 npm i 
-.env (PORT - MONGODB_URI)
 
--- levartar service
+-- generamos un archivo .env con sus respectivos variables de entorno
+(PORT= ???
+MONGODB_URI= ??? )
 
+-- levartar servidor
 npm run server
 
-postman: http://localhost:3000 - importar archivo .proto = seleccionar el metodo deseado
+-- abrir postman
+generar nuevo gRPC
+URL: http://localhost:3000 ,  importar archivo .proto = seleccionar el metodo deseado
 
 CREAR TAREA
 "message"
 {
-    "titulo": "HOLA",
-    "descripcion": "CHAU"
+    "titulo": "nueva tarea",
+    "descripcion": "esto no lo lees raul, lo se"
 }
 
 OBTENER ESTADISTICAS
